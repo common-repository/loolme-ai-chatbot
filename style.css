@@ -1,0 +1,115 @@
+<style>
+.loolme-hr {
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.loolme-h1 {
+    font-weight: 600 !important;
+}
+
+.loolme-h3 {
+    margin-block-start: 16px;
+    margin-block-end: 8px;
+    font-size: 1.05em;
+}
+
+.loolme-h4 {
+    margin-block-start: 16px;
+    margin-block-end: 8px;
+    font-size: 1.05em;
+}
+
+.loolme-pre-line {
+    white-space: pre-line;
+    margin-top: 0px;
+    font-size: 1.2em;
+}
+
+.loolme-contents {
+    border-radius: 16px;
+    background: white;
+    padding: 12px 24px;
+    margin: 16px;
+}
+
+.loolme-form {
+    border-radius: 16px;
+    background-color: #fff;
+    padding: 12px 32px 12px 32px;
+    width: fit-content;
+}
+
+.loolme-input-group {
+    padding: 0px 0px 0px 0px;
+}
+
+.loolme-textarea {
+    border-radius: 12px !important;
+    padding: 8px !important;
+    border-color: #ddd !important;
+}
+
+.loolme-input {
+    border-radius: 8px !important;
+    padding: 4px !important;
+    border-color: #ddd !important;
+    width: -webkit-fill-available;
+    min-width: 500px;
+}
+
+.loolme-input-error {
+    color: red;
+    font-size: 0.9em;
+}
+
+.loolme-button {
+    margin-left: 24px !important;
+    margin-top: 8px !important;
+    border-radius: 8px !important;
+    border-color: lightgray;
+    border-width: 1px;
+    background: white;
+}
+
+.loolme-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 100px;
+    top: 0;
+    width: calc(100% - 60px);
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.loolme-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.loolme-close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.loolme-close-modal:hover, .loolme-close-modal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.loolme-example {
+    width: 100%;
+    border-radius: 8px !important;
+    background: white !important;
+    overflow: hidden;
+}
+</style>

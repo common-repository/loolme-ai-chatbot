@@ -1,0 +1,161 @@
+<div class="wrap">
+    <h1 class="loolme-h1">LooLMe WordPressデモ機能設定</h1>
+    <br>
+
+    <form class="loolme-form" action="" method="post">
+        <?php wp_nonce_field(self::CREDENTIAL_ACTION, self::CREDENTIAL_NAME) ?>
+        <h3 class="loolme-h3">(1) 知識データとして登録対象のWordPressページのURL一覧</h3>
+        <textarea class="loolme-textarea" rows=10 cols=160 name="knowledge_url_list"><?= htmlspecialchars($knowledge_url_list) ?></textarea>
+        <div>URLは、1行ごとに入力してください。</div>
+        <div class="loolme-input-error"><?= htmlspecialchars($err_knowledge_url_list) ?></div>
+
+        <hr class="loolme-hr">
+        <h3 class="loolme-h3">(2) AIアシスタントのキャラクター設定</h3>
+        <div class="loolme-input-group">
+            <h4 class="loolme-h4">AIアシスタントの名称</h4>
+            <input class="loolme-input" type="text" name="helpdesk_name" style="width: -webkit-fill-available; min-width: 500px;" value="<?= htmlspecialchars($helpdesk_name) ?>">
+            <div class="loolme-input-error"><?= htmlspecialchars($err_helpdesk_name) ?></div>
+
+            <h4 class="loolme-h4">AIアシスタントのキャラ設定指示<button class="loolme-button" id="loolme_open_modal_1">記入例</button></h4>
+            <textarea class="loolme-textarea" rows=6 cols=160 name="character_settings"><?= htmlspecialchars($character_settings) ?></textarea>
+            <div class="loolme-input-error"><?= htmlspecialchars($err_character_settings) ?></div>
+
+            <h4 class="loolme-h4">自己紹介文<button class="loolme-button" id="loolme_open_modal_2">記入例</button></h4>
+            <textarea class="loolme-textarea" rows=3 cols=160 name="self_introduction"><?= htmlspecialchars($self_introduction) ?></textarea>
+            <div class="loolme-input-error"><?= htmlspecialchars($err_self_introduction) ?></div>
+
+            <h4 class="loolme-h4">挨拶文<button class="loolme-button" id="loolme_open_modal_3">記入例</button></h4>
+            <input class="loolme-input" type="text" name="intro_message" style="width: -webkit-fill-available; min-width: 500px;" value="<?= htmlspecialchars($intro_message) ?>">
+            <div class="loolme-input-error"><?= htmlspecialchars($err_intro_message) ?></div>
+        </div>
+
+        <hr class="loolme-hr">
+        <h3 class="loolme-h3">(3) AIアシスタントの表示条件</h3>
+        <div class="loolme-input-group">
+            <label for="require_login">
+                <input class="loolme-input" type="checkbox" name="require_login" id="require_login" <?php checked(1, get_option(self::PLUGIN_DB_PREFIX . '_require_login')); ?>>
+                ユーザーがログインしている時のみ表示
+            </label>
+        </div>
+
+        <br>
+        <br>
+        <button class="button button-primary button-large submit-button">保存</button>
+        <br>
+        <input class="loolme-input" type="hidden" name="t" value="demo">
+        <br>
+    </form>
+</div>
+
+<div id="loolme_modal_1" class="loolme-modal">
+    <div class="loolme-modal-content">
+        <span class="loolme-close-modal" id="loolme_close_modal_1">&times;</span>
+        <p>AIアシスタントのキャラ設定指示 記入例</p>
+<textarea class="loolme-example" id="loolme_example_1" readonly rows=7>
+奥様風に振舞ってください。下記の要領で会話してください。
+ - 「ざます」調で話してください。
+ - ツンデレで対応してください。
+
+例)
+～できますざます。
+～ございますざます。
+</textarea>
+        <br>
+        <br>
+        <button class="loolme-button" id="loolme_copy_1">クリップボードへコピー</span>
+    </div>
+</div>
+<div id="loolme_modal_2" class="loolme-modal">
+    <div class="loolme-modal-content">
+        <span class="loolme-close-modal" id="loolme_close_modal_2">&times;</span>
+        <p>自己紹介文 記入例</p>
+<textarea class="loolme-example" id="loolme_example_2" readonly rows=1>
+お客様、こんにちはざます。西園寺花子と申しますざます。何かご相談がございますか？お気軽にお申し付けくださいざます。
+</textarea>
+        <br>
+        <br>
+        <button class="loolme-button" id="loolme_copy_2">クリップボードへコピー</span>
+    </div>
+</div>
+<div id="loolme_modal_3" class="loolme-modal">
+    <div class="loolme-modal-content">
+        <span class="loolme-close-modal" id="loolme_close_modal_3">&times;</span>
+        <p>挨拶文 記入例</p>
+<textarea class="loolme-example" id="loolme_example_3" readonly rows=1>
+西園寺花子でございます。
+</textarea>
+        <br>
+        <br>
+        <button class="loolme-button" id="loolme_copy_3">クリップボードへコピー</span>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", (event) => {
+    var modal_1 = document.getElementById("loolme_modal_1");
+    var modal_2 = document.getElementById("loolme_modal_2");
+    var modal_3 = document.getElementById("loolme_modal_3");
+    var btn_1 = document.getElementById("loolme_open_modal_1");
+    var btn_2 = document.getElementById("loolme_open_modal_2");
+    var btn_3 = document.getElementById("loolme_open_modal_3");
+    var span_1 = document.getElementById("loolme_close_modal_1");
+    var span_2 = document.getElementById("loolme_close_modal_2");
+    var span_3 = document.getElementById("loolme_close_modal_3");
+    var copy_1 = document.getElementById("loolme_copy_1");
+    var copy_2 = document.getElementById("loolme_copy_2");
+    var copy_3 = document.getElementById("loolme_copy_3");
+    var example_1 = document.getElementById("loolme_example_1");
+    var example_2 = document.getElementById("loolme_example_2");
+    var example_3 = document.getElementById("loolme_example_3");
+
+    btn_1.onclick = function(event) {
+        event.preventDefault(); 
+        modal_1.style.display = "block";
+    }
+    btn_2.onclick = function(event) {
+        event.preventDefault(); 
+        modal_2.style.display = "block";
+    }
+    btn_3.onclick = function(event) {
+        event.preventDefault(); 
+        modal_3.style.display = "block";
+    }
+
+    span_1.onclick = function() {
+        modal_1.style.display = "none";
+    }
+    span_2.onclick = function() {
+        modal_2.style.display = "none";
+    }
+    span_3.onclick = function() {
+        modal_3.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal_1) {
+            modal_1.style.display = "none";
+        }
+        if (event.target == modal_2) {
+            modal_2.style.display = "none";
+        }
+        if (event.target == modal_3) {
+            modal_3.style.display = "none";
+        }
+    }
+
+    copy_1.onclick = function() {
+       example_1.select();
+       document.execCommand("copy");
+    }
+    copy_2.onclick = function() {
+       example_2.select();
+       document.execCommand("copy");
+    }
+    copy_3.onclick = function() {
+       example_3.select();
+       document.execCommand("copy");
+    }
+
+});
+</script>
+

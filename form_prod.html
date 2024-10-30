@@ -1,0 +1,38 @@
+<div class="wrap">
+    <h1 class="loolme-h1">LooLMe 正規版機能設定</h1>
+    <br>
+
+    <form class="loolme-form" action="" method="post">
+        <?php wp_nonce_field(self::CREDENTIAL_ACTION, self::CREDENTIAL_NAME) ?>
+
+        <p>
+LooLMe管理サイト(LooLMe管理パネル) ⇒ お客様向けAIお問合せ窓口<br>
+&nbsp;&nbsp;&nbsp; ⇒ 設置・運用 ⇒ WEBサイトへのお問合せ窓口の設置方法<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇒ WordPress LooLMe Pluginでのご利用<br>
+に記載されている設定データを入力してください。
+        </p>
+
+        <h3 class="loolme-h3">ID</h3>
+        <input class="loolme-input" type="text" name="data_id" value="<?= htmlspecialchars($data_id) ?>">
+        <div class="loolme-input-error"><?= htmlspecialchars($err_data_id) ?></div>
+        <br>
+
+        <h3 class="loolme-h3">LOGO</h3>
+        <input class="loolme-input" type="text" name="data_logo" value="<?= htmlspecialchars($data_logo) ?>">
+        <div class="loolme-input-error"><?= htmlspecialchars($err_data_logo) ?></div>
+        <br>
+        <h3 class="loolme-h3">AIアシスタントの表示条件</h3>
+        <label for="require_login">
+            <input class="loolme-input" type="checkbox" name="require_login" id="require_login" <?php checked(1, get_option(self::PLUGIN_DB_PREFIX . '_require_login')); ?>>
+            ユーザーがログインしている時のみ表示
+        </label>
+
+        <br>
+        <br>
+        <br>
+        <button class="loolme-button button button-primary button-large submit-button">保存</button>
+        <input class="loolme-input" type="hidden" name="t" value="prod">
+        <br>
+        <br>
+    </form>
+</div>
